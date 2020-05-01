@@ -21,12 +21,7 @@ public class TestMessageService {
 	
 	 @Test
      public void testMessage2() {
-             System.out.println("failedpositive2");
              Assertions.assertNotEquals(ms.sayHello(), "failed");
-     }
-     @Test
-     public void testMessage3() {
-             System.out.println("dummy");
      }
      @Test
      public void testMessage4() {
