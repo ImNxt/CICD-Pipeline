@@ -24,18 +24,14 @@ public class TestMessageService {
              Assertions.assertNotEquals(ms.sayHello(), "failed");
      }
      @Test
-     public void testMessage4() {
+     public void testMessage3() {
      }
      @Test
-     public void testMessage5() {
+     public void testMessage4() {
             Assertions.assertTrue(true);
      }
      @Test
-     public void testMessage6() {
-            Assertions.assertFalse(false);
-     }
-     @Test
-     public void testMessage7() {
+     public void testMessage5() {
             Assertions.assertFalse(false);
      }
 	
