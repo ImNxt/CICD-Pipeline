@@ -1,6 +1,6 @@
 FROM tomcat:8.0
 
-MAINTAINER Somyajain1406@gmail.com
+MAINTAINER "Somyajain1406@gmail.com"
 
 ARG WAR_FILE=target/*.war
 
