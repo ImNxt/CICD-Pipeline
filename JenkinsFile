@@ -1,0 +1,36 @@
+node{
+    stage('stage 1: Git checkout'){
+        git 'https://github.com/Somya1406/CICD-Pipeline.git'
+    }
+    
+    stage('stage 2: Maven clean'){
+        def mavenHome = tool name: 'maven3', type: 'maven'
+        def mavenCMD = "${mavenHome}/bin/mvn"
+        sh "${mavenCMD} clean"
+    }
+    
+    stage('stage 3: Maven build,test and package'){
+        def mavenHome = tool name: 'maven3', type: 'maven'
+        def mavenCMD = "${mavenHome}/bin/mvn"
+        sh "${mavenCMD} package"
+    }
+    
+    stage('stage 4: Building docker image'){
+        sh 'docker build -t somyadocker/cicd:1.0.0 .'
+    }
+    
+    stage('stage 5: Pushing docker image'){
+        withCredentials([string(credentialsId: 'dockerpwd', variable: 'dockerhubpass')]) {
+        sh "docker login -u somyadocker -p ${dockerhubpass}"
+        }
+        sh 'docker push somyadocker/cicd:1.0.0'
+    }
+    
+    stage('stage 6: Pulling docker image'){
+        sh 'docker pull somyadocker/cicd:1.0.0'
+    }
+    
+    stage('stage 7: Running docker image'){
+        sh 'docker run -p 8888:8080 -d somyadocker/cicd:1.0.0'
+    }
+}
