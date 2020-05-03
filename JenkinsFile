@@ -1,6 +1,6 @@
 node{
     stage('stage 1: Git checkout'){
-        git 'https://github.com/Somya1406/CICD-Pipeline.git'
+        git credentialsId: 'gitHub', url: 'https://github.com/Somya1406/CICD-Pipeline.git'
     }
     
     stage('stage 2: Maven clean'){
