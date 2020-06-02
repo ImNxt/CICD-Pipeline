@@ -1,6 +1,6 @@
 node{
     stage('stage 1: Git checkout'){
-        git credentialsId: 'gitHub', url: 'https://github.com/Somya1406/CICD-Pipeline.git'
+        git 'https://github.com/Somya1406/CICD-Pipeline.git'
     }
     
     stage('stage 2: Maven clean'){
@@ -32,5 +32,20 @@ node{
     
     stage('stage 7: Running docker image'){
         sh 'docker run -p 8888:8080 -d somyadocker/cicd:1.0.0'
+    }
+	
+	post {
+     success {
+       mail to: 'team@test.com',
+       color: 'blue',
+       message: "The pipeline ${currentBuild.fullDisplayName} completed successfully."
+       }
+
+     failure {
+      mail to: 'team@test.com',
+	  color: 'red',
+      subject: "Pipeline has failed: ${currentBuild.fullDisplayName}",
+      body: "Error in ${env.BUILD_URL}"
+      }
     }
 }
